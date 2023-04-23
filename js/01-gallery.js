@@ -31,10 +31,29 @@ function onImgClick(evt){
 
 instance.show()
 
-    listEl.addEventListener('keydown', (evt) =>{
-        if(evt.code === 'Escape'){
-            instance.close();
-            document.removeEventListener("keydown", onEscPress);
-        }
-    })
+    document.addEventListener('keydown',onEscPress);
+    
+    document.body.addEventListener('click', onBackdropClick);
+    
+}
+
+
+
+function onEscPress  (evt){
+  if(evt.code === 'Escape'){
+      instance.close();
+      document.removeEventListener("keydown", onEscPress);
+  }
+}
+
+
+
+function onBackdropClick(evt) {
+  
+  if (evt.target === document.querySelector('#basicLightbox')) {
+  
+    instance.close();
+    
+    document.body.removeEventListener('click', onBackdropClick);
+  }
 }
